@@ -1,29 +1,49 @@
 import "./globals.css";
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+import { Inter } from "next/font/google";
+import { cn } from "@/lib/utils";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+
+const inter = Inter({ subsets: ["latin"] });
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
-      <head />
-      <body>
-        <header>
-          <nav>
-            <ul>
+      <body className={cn(inter.className, "bg-background text-foreground")}>
+        <header className="bg-card shadow-md p-4">
+          <nav className="flex justify-between items-center max-w-4xl mx-auto">
+            <h1 className="text-xl font-bold">My App</h1>
+            <ul className="flex gap-4">
               <li>
-                <a href="/">Home</a>
+                <Link href="/">
+                  <Button variant="ghost">Home</Button>
+                </Link>
               </li>
               <li>
-                <a href="/login">Login</a>
+                <Link href="/login">
+                  <Button variant="ghost">Login</Button>
+                </Link>
               </li>
               <li>
-                <a href="/register">Register</a>
+                <Link href="/register">
+                  <Button variant="ghost">Register</Button>
+                </Link>
               </li>
               <li>
-                <a href="/products">Products</a>
+                <Link href="/products">
+                  <Button variant="ghost">Products</Button>
+                </Link>
               </li>
             </ul>
           </nav>
         </header>
-        <main>{children}</main>
+
+        <main className="max-w-4xl mx-auto p-6">{children}</main>
       </body>
     </html>
   );
